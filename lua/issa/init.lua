@@ -1,5 +1,8 @@
-require("issa.lsp")
+-- use system clipboard
+vim.o.clipboard = "unnamedplus"
+
 require("issa.packer")
+require("issa.lsp")
 
 -- Bindings / Custom Commands
 require("issa.bindings.commands")

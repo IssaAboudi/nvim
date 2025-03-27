@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/issaaboudi/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/home/issaaboudi/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/home/issaaboudi/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/home/issaaboudi/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/issaaboudi/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+local package_path_str = "/home/issaaboudi/.cache/nvim/packer_hererocks/2.1.1703358377/share/lua/5.1/?.lua;/home/issaaboudi/.cache/nvim/packer_hererocks/2.1.1703358377/share/lua/5.1/?/init.lua;/home/issaaboudi/.cache/nvim/packer_hererocks/2.1.1703358377/lib/luarocks/rocks-5.1/?.lua;/home/issaaboudi/.cache/nvim/packer_hererocks/2.1.1703358377/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/issaaboudi/.cache/nvim/packer_hererocks/2.1.1703358377/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -108,11 +108,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/issaaboudi/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
-  },
-  ["formatter.nvim"] = {
-    loaded = true,
-    path = "/home/issaaboudi/.local/share/nvim/site/pack/packer/start/formatter.nvim",
-    url = "https://github.com/mhartington/formatter.nvim"
   },
   ["friendly-snippets"] = {
     loaded = true,
@@ -211,19 +206,4 @@ end)
 if not no_errors then
   error_msg = error_msg:gsub('"', '\\"')
   vim.api.nvim_command('echohl ErrorMsg | echom "Error in packer_compiled: '..error_msg..'" | echom "Please check your config for correctness" | echohl None')
-end
-
--- Copy selected text to clipboard
-vim.api.nvim_set_keymap('x', '<C-C>', ':lua CopyToClipboard()<CR>', { noremap = true })
-
-function CopyToClipboard()
-    local saved_reg = vim.fn.getreg('"')  -- Save the current register
-    vim.fn.setreg('"', '')  -- Clear the default register
-    vim.cmd [[normal! ""y]]  -- Yank the visual selection
-    local clipboard_contents = vim.fn.getreg('@')  -- Get the content of the default register
-
-    local shell_command = string.format('echo %s | xclip -i -selection clipboard', vim.fn.shellescape(clipboard_contents))
-    vim.fn.system(shell_command)
-
-    vim.fn.setreg('"', saved_reg)  -- Restore the original register
 end

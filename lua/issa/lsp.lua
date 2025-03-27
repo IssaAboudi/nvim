@@ -8,6 +8,8 @@ lsp.ensure_installed({
 	'rust_analyzer',
 	'sumneko_lua',
 	'pyright',
+  'phpactor',
+  'ast_grep',
 })
 
 lsp.nvim_workspace()
@@ -45,4 +47,4 @@ lsp.on_attach(function(client, bufnr)
 	bind("i", "<C-H>", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
-lsp.setup()
+lsp.setup(
